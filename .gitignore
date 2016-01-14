@@ -16,4 +16,9 @@ Thumbs.db
 .project
 obj/
 .idea
+gradle.properties
+gradle/
+gradlew
+gradlew.bat
+settings.gradle
 /captures
