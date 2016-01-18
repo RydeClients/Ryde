@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -37,6 +38,13 @@ public class GroupActivity extends AppCompatActivity {
 //        });
     }
 
+    private void setUpMembersListView() {
+        Intent fromMainActivity = getIntent();
+        Group theGroup = fromMainActivity.getParcelableExtra("group");
+        MemberAdapter memberAdapter = new MemberAdapter(this, R.layout.member_layout, theGroup.getUsers());
+        ((ListView)this.findViewById(R.id.members)).setAdapter(memberAdapter);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -44,12 +52,16 @@ public class GroupActivity extends AppCompatActivity {
         return true;
     }
 
-    private void setUpMembersListView() {
-        Intent fromMainActivity = getIntent();
-        Group theGroup = fromMainActivity.getParcelableExtra("group");
-        MemberAdapter memberAdapter = new MemberAdapter(this, R.layout.member_layout, theGroup.getUsers());
-        ((ListView)this.findViewById(R.id.members)).setAdapter(memberAdapter);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.calendar) {
+            Intent startCalendarActivity = new Intent(this, CalendarActivity.class);
+            this.startActivity(startCalendarActivity);
+        }
+        return super.onOptionsItemSelected(item);
     }
+
     class MemberAdapter extends ArrayAdapter<User> {
         private int resource;
         public MemberAdapter(Context context, int resource, List<User> items) {

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.ryde.chris.ryde.MainActivity">
     <item
-        android:id="@+id/find"
+        android:id="@+id/calendar"
         android:orderInCategory="101"
         android:icon="@drawable/calendar"
         app:showAsAction="always" />
