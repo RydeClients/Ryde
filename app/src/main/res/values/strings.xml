@@ -10,5 +10,6 @@
     <string name="stub_name">Chris Sun</string>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_activity_group">GroupActivity</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>
