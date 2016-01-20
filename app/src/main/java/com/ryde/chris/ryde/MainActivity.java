@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         addToGroups.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder addGroupDialog = new AlertDialog.Builder(MainActivity.this, R.style.Theme_AppCompat_Dialog);
+                AlertDialog.Builder addGroupDialog = new AlertDialog.Builder(MainActivity.this, R.style.AppTheme);
                 LayoutInflater inflateDialogLayout = (LayoutInflater) MainActivity.this.getSystemService(LAYOUT_INFLATER_SERVICE);
                 final View dialogView = inflateDialogLayout.inflate(R.layout.add_group_dialog, null, false);
                 addGroupDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -55,7 +55,9 @@ public class MainActivity extends AppCompatActivity {
                 });
                 addGroupDialog.setNegativeButton("Cancel", null);
                 addGroupDialog.setView(dialogView);
-                addGroupDialog.show();
+                AlertDialog addGroupDia = addGroupDialog.create();
+                addGroupDia.show();
+                addGroupDia.getWindow().setLayout(1000,1600);
             }
         });
     }
