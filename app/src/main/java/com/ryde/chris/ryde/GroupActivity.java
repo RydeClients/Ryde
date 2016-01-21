@@ -67,6 +67,9 @@ public class GroupActivity extends AppCompatActivity {
         if(id == R.id.calendar) {
             Intent startCalendarActivity = new Intent(this, CalendarActivity.class);
             this.startActivity(startCalendarActivity);
+        } else if(id == R.id.groupChat) {
+            Intent startGroupChatActivity = new Intent(this, GroupChatActivity.class);
+            this.startActivity(startGroupChatActivity);
         }
         return super.onOptionsItemSelected(item);
     }

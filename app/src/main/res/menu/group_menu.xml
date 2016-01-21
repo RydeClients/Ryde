@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.ryde.chris.ryde.MainActivity">
     <item
-        android:id="@+id/message_board"
+        android:id="@+id/groupChat"
         android:orderInCategory="100"
         android:icon="@drawable/message_board"
         app:showAsAction="always"
