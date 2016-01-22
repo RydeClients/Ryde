@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends TouchActivity {
     private FloatingActionButton addToGroups;
     private ListView groupViewList;
     private List<Group> groupsList;
@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         setUpGroupsList();
         FloatingActionButton addToGroups = (FloatingActionButton)findViewById(R.id.add_group_button);
+        setTouchNClick(addToGroups);
         addToGroups.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

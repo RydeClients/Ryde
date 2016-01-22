@@ -17,10 +17,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
-public class GroupActivity extends AppCompatActivity {
+public class GroupActivity extends TouchActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,7 @@ public class GroupActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         setUpMembersListView();
         Button pickupDest = (Button) findViewById(R.id.pickupDestButton);
+        setTouchNClick(pickupDest);
         pickupDest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

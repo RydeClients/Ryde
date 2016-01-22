@@ -51,11 +51,12 @@
 
         <Button
             android:layout_width="500dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="10dp"
             android:text="@string/pickup_and_dropoff"
             android:id="@+id/pickupDestButton"
+            style="@style/btn_white_large"
             android:layout_gravity="center_horizontal" />
     </RelativeLayout>
 

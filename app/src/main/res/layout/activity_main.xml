@@ -59,9 +59,7 @@
         android:layout_gravity="bottom|right"
         android:layout_margin="16dp"
         android:src="@drawable/groups_list_add"
-        android:background="@color/white"
-        fab:fab_colorNormal="@color/primary"
-        fab:fab_colorPressed="@color/accent_pressed"
-        fab:fab_colorRipple="@color/ripple" />
+        android:background="@drawable/groups_list_add"
+    />
 
 </android.support.design.widget.CoordinatorLayout>
