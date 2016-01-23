@@ -24,18 +24,18 @@
             android:layout_marginBottom="@dimen/pad_20dp" />
 
         <EditText
-            android:id="@+id/user"
+            android:id="@+id/username"
             style="@style/editext_graybg"
             android:layout_width="wrap_content"
             android:layout_height="100dp"
             android:drawableLeft="@drawable/ic_username"
-            android:hint="@string/email" >
+            android:hint="@string/username" >
 
             <requestFocus />
         </EditText>
 
         <EditText
-            android:id="@+id/pwd"
+            android:id="@+id/password"
             style="@style/editext_graybg"
             android:layout_width="wrap_content"
             android:layout_height="100dp"
