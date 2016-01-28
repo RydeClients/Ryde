@@ -67,9 +67,7 @@ public class LoginActivity extends TouchActivity {
                 editor.apply();
                 Intent startMainActivity = new Intent(LoginActivity.this, MainActivity.class);
                 LoginActivity.this.startActivity(startMainActivity);
-
-
-
+                finish();
             }
         });
     }
