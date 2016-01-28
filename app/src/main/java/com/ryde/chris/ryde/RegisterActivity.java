@@ -8,9 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.parse.ParseException;
-import com.parse.ParseUser;
-import com.parse.SignUpCallback;
 
 public class RegisterActivity extends TouchActivity {
 
@@ -36,29 +33,11 @@ public class RegisterActivity extends TouchActivity {
                 final ProgressDialog dia = ProgressDialog.show(RegisterActivity.this, null,
                         getString(R.string.alert_wait));
 
-                final ParseUser pu = new ParseUser();
-                pu.setEmail(email);
-                pu.setPassword(password);
-                pu.setUsername(username);
-                pu.signUpInBackground(new SignUpCallback() {
-
-                    @Override
-                    public void done(ParseException e) {
-                        dia.dismiss();
-                        if (e == null) {
-                            setResult(RESULT_OK);
                             Intent startMainActivity = new Intent(RegisterActivity.this, MainActivity.class);
                             RegisterActivity.this.startActivity(startMainActivity);
                             finish();
-                        } else {
-                            Utils.showDialog(
-                                    RegisterActivity.this,
-                                    getString(R.string.err_signup) + " "
-                                            + e.getMessage());
-                            e.printStackTrace();
-                        }
-                    }
-                });
+
+
             }
         });
     }

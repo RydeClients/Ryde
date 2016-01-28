@@ -71,7 +71,7 @@ public class MainActivity extends TouchActivity {
         User[] stubUsers = { new User("Chris Sun", R.drawable.chris), new User("Barack Obama",R.drawable.barack_obama),
                 new User("Ariana Grande",R.drawable.ariana), new User("Shaheen Sharifian", R.drawable.shariwizard),
                     new User("Fion Chan", R.drawable.fion)};
-        List<User> usersList = new ArrayList<>(Arrays.asList(stubUsers));
+        List<User> usersList = new ArrayList<User>(Arrays.asList(stubUsers));
         for(String name:mockGroupNames) {
             Group toAdd = new Group(name);
             toAdd.setUsersList(usersList);
