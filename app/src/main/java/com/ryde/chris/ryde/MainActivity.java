@@ -108,6 +108,7 @@ public class MainActivity extends TouchActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.my_profile) {
             Intent startProfileActivity = new Intent(this, ProfileActivity.class);
+            startProfileActivity.putExtra("profile", new User("Chris Sun", R.drawable.chris));
             this.startActivity(startProfileActivity);
         }
 

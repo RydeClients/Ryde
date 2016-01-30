@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -48,8 +49,18 @@ public class GroupActivity extends TouchActivity {
     private void setUpGroupData() {
         Intent fromMainActivity = getIntent();
         Group theGroup = fromMainActivity.getParcelableExtra("group");
-        MemberAdapter memberAdapter = new MemberAdapter(this, R.layout.member_layout, theGroup.getUsers());
-        ((ListView)this.findViewById(R.id.members)).setAdapter(memberAdapter);
+        final MemberAdapter memberAdapter = new MemberAdapter(this, R.layout.member_layout, theGroup.getUsers());
+        ListView members = (ListView)this.findViewById(R.id.members);
+        members.setAdapter(memberAdapter);
+        members.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent startProfileActivity = new Intent(GroupActivity.this, ProfileActivity.class);
+                startProfileActivity.putExtra("profile", memberAdapter.getItem(position));
+                GroupActivity.this.startActivity(startProfileActivity);
+
+            }
+        });
         ((TextView)findViewById(R.id.membersTextView)).setText("Group ID: " + theGroup.getId());
     }
 
