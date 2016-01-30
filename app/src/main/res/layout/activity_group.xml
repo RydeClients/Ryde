@@ -55,7 +55,6 @@
             android:layout_height="420dp"
             android:layout_below="@id/membersTextView"
             android:id="@+id/members" />
-
         <Button
             android:layout_width="500dp"
             android:layout_height="50dp"
@@ -65,6 +64,14 @@
             android:id="@+id/pickupDestButton"
             style="@style/btn_white_large"
             android:layout_gravity="center_horizontal" />
+        <CheckBox
+            android:id="@+id/isDiscoverable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/discoverable"
+            android:layout_above="@id/pickupDestButton"
+            android:layout_marginLeft="20dp"
+            android:checked="true" />
     </RelativeLayout>
 
     <!--<android.support.design.widget.FloatingActionButton-->
