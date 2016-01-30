@@ -3,9 +3,6 @@ package com.ryde.chris.ryde;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,7 +14,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -29,7 +25,7 @@ public class GroupActivity extends TouchActivity {
         setContentView(R.layout.activity_group);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        setUpMembersListView();
+        setUpGroupData();
         Button pickupDest = (Button) findViewById(R.id.pickupDestButton);
         setTouchNClick(pickupDest);
         pickupDest.setOnClickListener(new View.OnClickListener() {
@@ -49,11 +45,12 @@ public class GroupActivity extends TouchActivity {
 //        });
     }
 
-    private void setUpMembersListView() {
+    private void setUpGroupData() {
         Intent fromMainActivity = getIntent();
         Group theGroup = fromMainActivity.getParcelableExtra("group");
         MemberAdapter memberAdapter = new MemberAdapter(this, R.layout.member_layout, theGroup.getUsers());
         ((ListView)this.findViewById(R.id.members)).setAdapter(memberAdapter);
+        ((TextView)findViewById(R.id.membersTextView)).setText("Group ID: " + theGroup.getId());
     }
 
     @Override

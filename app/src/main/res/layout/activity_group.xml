@@ -34,19 +34,26 @@
         tools:context="com.ryde.chris.ryde.GroupActivity"
         android:orientation="vertical"
         tools:showIn="@layout/activity_group">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/groupId"
+            android:layout_above="@+id/membersTextView"
+            android:layout_alignParentLeft="true"
+            />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/members"
-            android:id="@+id/textView3"
+            android:id="@+id/membersTextView"
             android:textSize="30sp"
             />
 
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="420dp"
-            android:layout_below="@id/textView3"
+            android:layout_below="@id/membersTextView"
             android:id="@+id/members" />
 
         <Button
