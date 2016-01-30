@@ -11,6 +11,7 @@
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
         android:orientation="vertical"
+        android:focusableInTouchMode="true"
         android:paddingBottom="@dimen/pad_20dp"
         android:paddingLeft="@dimen/pad_15dp"
         android:paddingRight="@dimen/pad_15dp"
@@ -30,8 +31,6 @@
             android:layout_height="100dp"
             android:drawableLeft="@drawable/ic_username"
             android:hint="@string/username" >
-
-            <requestFocus />
         </EditText>
 
         <EditText
