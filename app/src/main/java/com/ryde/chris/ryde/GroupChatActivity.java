@@ -3,11 +3,9 @@ package com.ryde.chris.ryde;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.KeyEvent;
-import android.view.inputmethod.EditorInfo;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.firebase.client.Firebase;
 
@@ -25,14 +23,11 @@ public class GroupChatActivity extends AppCompatActivity {
 
         mFireBase = new Firebase(FIREBASE_URL).child("chat");
         messageToSend = (EditText)findViewById(R.id.message_to_send);
-        messageAdapter = new MessageListAdapter(this, mFireBase.limitToFirst(50));
-        messageToSend.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        messageAdapter = new MessageListAdapter(this, mFireBase.limitToFirst(50), (Group)getIntent().getParcelableExtra("group"));
+        findViewById(R.id.btnSend).setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
-                if (actionId == EditorInfo.IME_NULL && keyEvent.getAction() == KeyEvent.ACTION_DOWN) {
-                    sendMessage();
-                }
-                return true;
+            public void onClick(View v) {
+                GroupChatActivity.this.sendMessage();
             }
         });
     }

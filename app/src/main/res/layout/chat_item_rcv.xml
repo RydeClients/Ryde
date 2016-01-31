@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/llaa"
     android:layout_width="match_parent"
-    android:layout_height="75dp"
-    android:orientation="vertical" 
+    android:layout_height="match_parent"
     >
-
+    <com.ryde.chris.ryde.RoundedImageView
+        android:id="@+id/profileImageView"
+        android:layout_width="50dp"
+        android:layout_height="80dp" />
     <LinearLayout
             android:id="@+id/v1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_marginRight="@dimen/pad_10dp"
+            android:layout_marginLeft="30dp"
             android:background="@drawable/chat_bubble_gray"
             android:gravity="center_vertical"
             android:orientation="vertical"
@@ -25,27 +28,8 @@
                 android:text="TextView"
                 android:textColor="@color/main_color_gray_dk"
                 android:textSize="@dimen/txt_13sp" />
-            <TextView
-                android:id="@+id/lbl2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="text"
-                android:textColor="@color/main_color_gray_dk"
-                android:textSize="@dimen/txt_14sp" 
-                android:maxLines="4"/>
 
-        </LinearLayout>
+    </LinearLayout>
 
-        <!--<TextView-->
-            <!--android:id="@+id/lbl3"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="text"-->
-            <!--android:textColor="@color/main_color_gray"-->
-            <!--android:textSize="@dimen/txt_14sp"-->
-            <!--android:layout_alignRight="@+id/v1"-->
-            <!--android:layout_below="@+id/v1"-->
-            <!--android:layout_marginTop="@dimen/pad_5dp"-->
-            <!--android:layout_marginLeft="@dimen/pad_20dp"-->
-            <!--/>-->
-</LinearLayout>
+
+</FrameLayout>

@@ -79,6 +79,7 @@ public class GroupActivity extends TouchActivity {
             this.startActivity(startCalendarActivity);
         } else if(id == R.id.groupChat) {
             Intent startGroupChatActivity = new Intent(this, GroupChatActivity.class);
+            startGroupChatActivity.putExtra("group", getIntent().getParcelableExtra("group"));
             this.startActivity(startGroupChatActivity);
         }
         return super.onOptionsItemSelected(item);
