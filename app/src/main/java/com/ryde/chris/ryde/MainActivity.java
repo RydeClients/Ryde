@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,6 +25,7 @@ import com.melnykov.fab.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class MainActivity extends TouchActivity {
     private FloatingActionButton addToGroups;
@@ -66,18 +67,23 @@ public class MainActivity extends TouchActivity {
     private void setUpGroupsList() {
         groupViewList = (ListView)findViewById(R.id.grouplist);
         groupsList = new ArrayList<Group>();
-        String[] mockGroupNames = {"DayCare-4 person","Soccer Practice-3 people", "Computer Science Study-2 people",
-        "School-3 people", "Work-5 people"};
+        String[] mockGroupNames = {"DayCare","Soccer Practice", "Computer Science Study", "School", "Work"};
         User[] stubUsers = { new User("Chris Sun", R.drawable.chris), new User("Barack Obama",R.drawable.barack_obama),
                 new User("Ariana Grande",R.drawable.ariana), new User("Shaheen Sharifian", R.drawable.shariwizard),
                     new User("Fion Chan", R.drawable.fion)};
         List<User> usersList = new ArrayList<User>(Arrays.asList(stubUsers));
         for(String name:mockGroupNames) {
+            List<User> testUsers = new ArrayList<>();
+            testUsers.addAll(usersList);
+            int trySize = new Random().nextInt(5) + 1;
+            for(int k=0;k<usersList.size() - trySize; k++) {
+                testUsers.remove(new Random().nextInt(testUsers.size()));
+            }
             Group toAdd = new Group(name);
-            toAdd.setUsersList(usersList);
+            toAdd.setUsersList(testUsers);
             groupsList.add(toAdd);
         }
-        ArrayAdapter<Group> groupAdapter = new GroupAdapter(this,android.R.layout.simple_list_item_1, groupsList);
+        ArrayAdapter<Group> groupAdapter = new GroupAdapter(this,R.layout.simple_group_list_item, groupsList);
         groupViewList.setAdapter(groupAdapter);
         FloatingActionButton addToGroups = (FloatingActionButton)findViewById(R.id.add_group_button);
         addToGroups.attachToListView(groupViewList);
@@ -124,15 +130,21 @@ public class MainActivity extends TouchActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            TextView groupNameView = (TextView)convertView;
-            if (groupNameView == null) {
-                LayoutInflater vi;
-                vi = LayoutInflater.from(getContext());
-                groupNameView = (TextView)vi.inflate(resource, null);
-            }
+            LayoutInflater vi;
+            vi = LayoutInflater.from(getContext());
+            convertView = vi.inflate(resource, null);
             Group p = getItem(position);
-            groupNameView.setText(p.getGroupName());
-            return groupNameView;
+            ((TextView)convertView.findViewById(R.id.group_name)).setText(p.getGroupName());
+            LinearLayout memberImages = (LinearLayout) convertView.findViewById(R.id.group_members);
+            List<User> members = p.getUsers();
+            for(int k=0; k<members.size(); k++) {
+                final RoundedImageView memberImage = new RoundedImageView(MainActivity.this);
+                memberImage.setImageResource(members.get(k).getProfileImage());
+                memberImage.setPadding(0,0,0,0);
+                memberImages.addView(memberImage);
+                memberImage.getLayoutParams().width=180;
+            }
+            return convertView;
         }
     }
 
