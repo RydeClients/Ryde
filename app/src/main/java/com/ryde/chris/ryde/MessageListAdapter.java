@@ -66,9 +66,6 @@ public class MessageListAdapter extends BaseAdapter {
             }
         });
     }
-    public void clear() {
-        messageList.clear();
-    }
     @Override
     public int getCount() {
         return messageList.size();

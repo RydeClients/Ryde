@@ -39,12 +39,6 @@ public class GroupChatActivity extends AppCompatActivity {
         messagesList.setAdapter(messageAdapter);
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        messageAdapter.clear();
-    }
-
     private void sendMessage() {
         String textToSend = messageToSend.getText().toString();
         if (!textToSend.equals("")) {
