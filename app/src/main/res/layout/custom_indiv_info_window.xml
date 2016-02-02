@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pickupOrDropoff"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/forWhichUser"
+        android:layout_below="@+id/pickupOrDropoff"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+
+        />
+
+    <Button
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:id="@+id/deleteMarkerButton"
+        android:background="@drawable/delete_marker"
+        android:layout_alignBottom="@id/forWhichUser"
+        android:layout_marginLeft="80dp"
+         />
+</RelativeLayout>
