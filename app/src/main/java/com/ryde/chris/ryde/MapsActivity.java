@@ -42,6 +42,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         moveToCurrentLocation(startLocation);
         LatLng endLocation = new LatLng(47.573733, -122.158436);
         mMap.addMarker(new MarkerOptions().position(endLocation).title("Destination"));
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                mMap.addMarker(new MarkerOptions().position(latLng));
+            }
+        });
     }
 
     private void moveToCurrentLocation(LatLng currentLocation) {
