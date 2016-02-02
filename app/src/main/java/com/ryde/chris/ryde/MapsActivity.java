@@ -38,14 +38,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         LatLng startLocation = new LatLng(47.5626337, -122.1344056);
-        mMap.addMarker(new MarkerOptions().position(startLocation).title("Pickup"));
+        mMap.addMarker(new MarkerOptions().position(startLocation).title("Pickup").draggable(true));
         moveToCurrentLocation(startLocation);
         LatLng endLocation = new LatLng(47.573733, -122.158436);
-        mMap.addMarker(new MarkerOptions().position(endLocation).title("Destination"));
+        mMap.addMarker(new MarkerOptions().position(endLocation).title("Destination").draggable(true));
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
-                mMap.addMarker(new MarkerOptions().position(latLng));
+                mMap.addMarker(new MarkerOptions().position(latLng).draggable(true));
             }
         });
     }
