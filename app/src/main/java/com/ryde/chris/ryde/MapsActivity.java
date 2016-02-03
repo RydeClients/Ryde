@@ -56,8 +56,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
-            public void onMapClick(LatLng latLng) {
-                mMap.addMarker(new MarkerOptions().position(latLng).draggable(true).title("Pickup").snippet("For Chris"));
+            public void onMapClick(final LatLng latLng) {
+                final AlertDialog addNewMarkerDialog = new AlertDialog.Builder(MapsActivity.this).create();
+                final View addNewMarkerDialogView = MapsActivity.this.getLayoutInflater().inflate(R.layout.pickup_or_dropoff, null);
+                addNewMarkerDialogView.findViewById(R.id.pickupButton).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mMap.addMarker(new MarkerOptions().position(latLng).draggable(true).title("Pickup").snippet("For Chris"));
+                        addNewMarkerDialog.dismiss();
+                    }
+                });
+                addNewMarkerDialogView.findViewById(R.id.dropOffButton).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mMap.addMarker(new MarkerOptions().position(latLng).draggable(true).title("Dropoff").snippet("For Chris"));
+                        addNewMarkerDialog.dismiss();
+                    }
+                });
+                addNewMarkerDialog.setView(addNewMarkerDialogView);
+                addNewMarkerDialog.show();
+                addNewMarkerDialog.getWindow().setLayout(880,550);
+
             }
         });
 

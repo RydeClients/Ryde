@@ -3,7 +3,7 @@
     <string name="alert_wait">Please wait...</string>
     <string name="app_name">Ryde</string>
     <string name="action_settings">Settings</string>
-    <string name="destination">Destination</string>
+    <string name="dropoff">Dropoff</string>
     <string name="discoverable">Is Discoverable</string>
     <string name="email">Email</string>
     <string name="err_fields_empty">Please fill all the fields.</string>
@@ -16,7 +16,9 @@
     <string name="my_profile">My Profile</string>
     <string name="register">Register</string>
     <string name="password">Password</string>
+    <string name="pickup">Pickup</string>
     <string name="pickup_and_dropoff">Pickup and Dropoff Locations</string>
+    <string name="set_location">Set Location</string>
     <string name="starting_point">Starting point</string>
     <string name="stub_name">Chris Sun</string>
     <string name="title_activity_profile">ProfileActivity</string>

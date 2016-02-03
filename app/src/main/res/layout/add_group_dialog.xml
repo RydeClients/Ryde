@@ -36,7 +36,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:textColor="@color/black"
-        android:hint="@string/destination"
+        android:hint="@string/dropoff"
         android:id="@+id/destination" />
 
     <CheckBox
