@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
@@ -116,6 +117,18 @@ public class MainActivity extends TouchActivity {
             Intent startProfileActivity = new Intent(this, ProfileActivity.class);
             startProfileActivity.putExtra("profile", new User("Chris Sun", R.drawable.chris));
             this.startActivity(startProfileActivity);
+        } else if(id == R.id.find ) {
+            AlertDialog.Builder findGroupDialogBuilder = new AlertDialog.Builder(MainActivity.this, R.style.AppTheme);
+            LayoutInflater inflateDialogLayout = (LayoutInflater) MainActivity.this.getSystemService(LAYOUT_INFLATER_SERVICE);
+            final View findGroupView = inflateDialogLayout.inflate(R.layout.find_group, null, false);
+            setTouchNClick(findGroupView.findViewById(R.id.findButton));
+            findGroupDialogBuilder.setView(findGroupView);
+            AlertDialog findGroupDialog = findGroupDialogBuilder.create();
+            Window window = findGroupDialog.getWindow();
+            window.getAttributes().y = -900;
+            window.setBackgroundDrawableResource(R.color.white);
+            window.setLayout(1500,560);
+            findGroupDialog.show();
         }
 
         return super.onOptionsItemSelected(item);
