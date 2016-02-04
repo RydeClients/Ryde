@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
@@ -60,7 +61,10 @@ public class MainActivity extends TouchActivity {
                 addGroupDialog.setView(dialogView);
                 AlertDialog addGroupDia = addGroupDialog.create();
                 addGroupDia.show();
-                addGroupDia.getWindow().setLayout(1000,1600);
+                WindowManager.LayoutParams windowParams = addGroupDia.getWindow().getAttributes();
+                windowParams.dimAmount = 0.75f;
+                windowParams.flags |= WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+                addGroupDia.getWindow().setLayout(1000, 1000);
             }
         });
     }
@@ -127,7 +131,10 @@ public class MainActivity extends TouchActivity {
             Window window = findGroupDialog.getWindow();
             window.getAttributes().y = -900;
             window.setBackgroundDrawableResource(R.color.white);
-            window.setLayout(1500,560);
+            window.setLayout(1500, 560);
+            WindowManager.LayoutParams windowParams = window.getAttributes();
+            windowParams.dimAmount = 0.75f;
+            windowParams.flags |= WindowManager.LayoutParams.FLAG_DIM_BEHIND;
             findGroupDialog.show();
         }
 
