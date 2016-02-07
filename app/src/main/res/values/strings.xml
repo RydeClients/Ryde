@@ -1,5 +1,12 @@
 <resources>
     <string name="about_me">About Me</string>
+    <string name="abbrev_friday">FRI</string>
+    <string name="abbrev_monday">MON</string>
+    <string name="abbrev_saturday">SAT</string>
+    <string name="abbrev_sunday">SUN</string>
+    <string name="abbrev_tuesday">TUES</string>
+    <string name="abbrev_thursday">THURS</string>
+    <string name="abbrev_wednesday">WED</string>
     <string name="alert_wait">Please wait...</string>
     <string name="app_name">Ryde</string>
     <string name="action_settings">Settings</string>
