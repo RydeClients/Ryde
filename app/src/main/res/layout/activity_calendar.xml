@@ -11,13 +11,13 @@
         android:paddingBottom="12dp"
         android:paddingLeft="30dp"
         android:orientation="horizontal"
-        android:paddingRight="30dp">
-        <ImageView
+        >
+        <Button
             android:id="@+id/calendar_prev_button"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/prev_icon"/>
+            android:background="@drawable/prev_icon"/>
         <!-- date title -->
         <TextView
             android:id="@+id/calendar_date_display"
@@ -28,12 +28,12 @@
             android:text="JUN 2015"
             android:layout_marginLeft="80dp" android:layout_marginTop="5dp"
             />
-        <ImageView
+        <Button
             android:id="@+id/calendar_next_button"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="80dp"
-            android:src="@drawable/next_icon"/>
+            android:background="@drawable/next_icon"/>
     </LinearLayout>
 
     <!-- days header -->

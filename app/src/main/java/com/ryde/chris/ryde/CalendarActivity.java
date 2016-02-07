@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -24,17 +25,33 @@ public class CalendarActivity extends AppCompatActivity {
     private static final int MAX_CELLS = 42;
 
     private LinearLayout header;
-    private ImageView btnPrev;
-    private ImageView nextButton;
+    private Button btnPrev;
+    private Button nextButton;
     private GridView calGrid;
     private TextView monthDisplay;
+    private Calendar calendarDisplay;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        calendarDisplay = Calendar.getInstance();
         setContentView(R.layout.activity_calendar);
         header = (LinearLayout) findViewById(R.id.calendar_header);
-        btnPrev = (ImageView) findViewById(R.id.calendar_prev_button);
-        nextButton = (ImageView) findViewById(R.id.calendar_next_button);
+        btnPrev = (Button) findViewById(R.id.calendar_prev_button);
+        btnPrev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calendarDisplay.add(Calendar.MONTH, -1);
+                updateCalendar();
+            }
+        });
+        nextButton = (Button) findViewById(R.id.calendar_next_button);
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calendarDisplay.add(Calendar.MONTH, 1);
+                updateCalendar();
+            }
+        });
         calGrid = (GridView) findViewById(R.id.calendar_grid);
         monthDisplay = (TextView)findViewById(R.id.calendar_date_display);
         updateCalendar();
@@ -42,7 +59,10 @@ public class CalendarActivity extends AppCompatActivity {
 
     private void updateCalendar() {
         List<Date> days = new ArrayList<Date>();
-        Calendar calendarData = (Calendar)Calendar.getInstance().clone();
+        Calendar calendarData = (Calendar)calendarDisplay.clone();
+        while(calendarData.get(Calendar.DAY_OF_MONTH) > 1) {
+            calendarData.add(Calendar.DAY_OF_MONTH, -1);
+        }
         int monthBeginningCell = calendarData.get(Calendar.DAY_OF_WEEK) - 1;
         calendarData.add(Calendar.DAY_OF_MONTH, -monthBeginningCell);
         while(days.size() < MAX_CELLS) {
@@ -51,7 +71,7 @@ public class CalendarActivity extends AppCompatActivity {
         }
         calGrid.setAdapter(new RydeCalendarAdapter(this, R.layout.ryde_calendar_date, days));
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM yyy");
-        monthDisplay.setText(simpleDateFormat.format(new Date().getTime()));
+        monthDisplay.setText(simpleDateFormat.format(calendarDisplay.getTime()));
     }
 
     private class RydeCalendarAdapter extends ArrayAdapter<Date> {
