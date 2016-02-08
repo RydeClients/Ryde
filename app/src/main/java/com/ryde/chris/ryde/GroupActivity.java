@@ -16,10 +16,14 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GroupActivity extends TouchActivity {
-
+    private Group mGroup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +53,7 @@ public class GroupActivity extends TouchActivity {
     private void setUpGroupData() {
         Intent fromMainActivity = getIntent();
         Group theGroup = fromMainActivity.getParcelableExtra("group");
+        mGroup = theGroup;
         final MemberAdapter memberAdapter = new MemberAdapter(this, R.layout.member_layout, theGroup.getUsers());
         ListView members = (ListView)this.findViewById(R.id.members);
         members.setAdapter(memberAdapter);
@@ -76,6 +81,16 @@ public class GroupActivity extends TouchActivity {
         int id = item.getItemId();
         if(id == R.id.calendar) {
             Intent startCalendarActivity = new Intent(this, CalendarActivity.class);
+            Map<Date, User> drivingSchedule = new HashMap<Date, User>();
+            List<User> members = mGroup.getUsers();
+            Calendar cal = Calendar.getInstance();
+            int[] datesToTest = {11, 12, 17, 22, 26};
+            for(int k=0; k<datesToTest.length; k++) {
+                cal.set(2016, 1, datesToTest[k]);
+                drivingSchedule.put(cal.getTime(), members.get((int) (Math.random() * members.size())));
+            }
+            mGroup.setSchedule(drivingSchedule);
+            startCalendarActivity.putExtra("group", mGroup);
             this.startActivity(startCalendarActivity);
         } else if(id == R.id.groupChat) {
             Intent startGroupChatActivity = new Intent(this, GroupChatActivity.class);

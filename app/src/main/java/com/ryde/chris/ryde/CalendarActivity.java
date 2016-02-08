@@ -1,6 +1,7 @@
 package com.ryde.chris.ryde;
 
 import android.content.Context;
+import android.content.Intent;
 import
         android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 
 public class CalendarActivity extends AppCompatActivity {
@@ -30,9 +32,13 @@ public class CalendarActivity extends AppCompatActivity {
     private GridView calGrid;
     private TextView monthDisplay;
     private Calendar calendarDisplay;
+    private Map<Date, User> groupSchedule;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent fromMainActivity = getIntent();
+        Group theGroup = fromMainActivity.getParcelableExtra("group");
+        groupSchedule = theGroup.getSchedule();
         calendarDisplay = Calendar.getInstance();
         setContentView(R.layout.activity_calendar);
         header = (LinearLayout) findViewById(R.id.calendar_header);
@@ -91,6 +97,11 @@ public class CalendarActivity extends AppCompatActivity {
         }
 
         @Override
+        public Date getItem(int position) {
+            return calData.get(position);
+        }
+
+        @Override
         public long getItemId(int position) {
             return position;
         }
@@ -103,6 +114,11 @@ public class CalendarActivity extends AppCompatActivity {
             }
             Date today = new Date();
             Date calDate = getItem(position);
+            Date dateInMap = dateInMap(groupSchedule, calDate);
+            if(dateInMap != null) {
+                ImageView profileView = (ImageView) convertView.findViewById(R.id.driverPhoto);
+                profileView.setImageResource(groupSchedule.get(dateInMap).getProfileImage());
+            }
             TextView date = (TextView)convertView.findViewById(R.id.date);
             if(today.getMonth() != calDate.getMonth() || today.getYear() != calDate.getYear()) {
                 date.setTextColor(getResources().getColor(R.color.greyed_out));
@@ -111,6 +127,21 @@ public class CalendarActivity extends AppCompatActivity {
             }
             date.setText(String.valueOf(calDate.getDate()));
             return convertView;
+        }
+        //In Date.Java, equals compares exact miliseconds, need to write our own
+        private Date dateInMap(Map<Date, User> datesMap, Date key) {
+            Calendar keyDate = Calendar.getInstance();
+            keyDate.setTime(key);
+            for(Date date: datesMap.keySet()) {
+                Calendar calDate = Calendar.getInstance();
+                calDate.setTime(date);
+                if(calDate.get(Calendar.DAY_OF_MONTH) == keyDate.get(Calendar.DAY_OF_MONTH)  &&
+                        calDate.get(Calendar.MONTH) == keyDate.get(Calendar.MONTH)
+                        && calDate.get(Calendar.YEAR) == keyDate.get(Calendar.YEAR)) {
+                    return date;
+                }
+            }
+            return null;
         }
     }
 }
