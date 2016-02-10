@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:color="@color/white">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/driver"
+        android:id="@+id/driver" />
+
+    <include layout="@layout/member_layout"
+        android:layout_height="90dp"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        />
+
+    <TextView
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="@string/depart_to"
+        android:layout_marginLeft="30dp"
+        android:id="@+id/departToDestination"
+        android:layout_below="@id/driver"
+        android:layout_marginTop="55dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="8:40AM"
+        android:id="@+id/departToDestinationTime"
+        android:layout_alignTop="@+id/departToDestination"
+        android:layout_toRightOf="@id/departToDestination"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        />
+
+    <TextView
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="@string/depart_from"
+        android:id="@+id/departFromDestinaton"
+        android:layout_marginLeft="30dp"
+        android:layout_below="@id/departToDestination"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="5:00PM"
+        android:id="@+id/departFromDestinationTime"
+        android:layout_below="@id/departToDestination"
+        android:layout_toRightOf="@id/departFromDestinaton"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/edit"
+        android:id="@+id/textView4"
+        android:textColor="@color/material_blue_500"
+        android:layout_below="@+id/departFromDestinaton"
+        android:layout_alignStart="@+id/departFromDestinationTime"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"/>
+</RelativeLayout>

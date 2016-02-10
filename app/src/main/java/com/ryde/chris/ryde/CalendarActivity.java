@@ -1,5 +1,6 @@
 package com.ryde.chris.ryde;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import
@@ -8,11 +9,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -59,6 +63,35 @@ public class CalendarActivity extends AppCompatActivity {
             }
         });
         calGrid = (GridView) findViewById(R.id.calendar_grid);
+        calGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Date selected = (Date)parent.getItemAtPosition(position);
+                Date selectedInMap = dateInMap(groupSchedule, selected);
+                if(selectedInMap == null) {
+                    //new dialog
+                } else {
+                    //existing dialog
+                    AlertDialog.Builder driveInfoDialogBuilder = new AlertDialog.Builder(CalendarActivity.this, R.style.AppTheme);
+                    LayoutInflater inflateDriveInfoDialog = (LayoutInflater) CalendarActivity.this.getSystemService(LAYOUT_INFLATER_SERVICE);
+                    final View driverInfoDialog = inflateDriveInfoDialog.inflate(R.layout.drive_info, null, false);
+                    User driver = groupSchedule.get(selectedInMap);
+                    ((TextView)driverInfoDialog.findViewById(R.id.memberName)).setText(driver.getName().split(" ")[0]);
+                    ImageView driverProfileImage = (ImageView)driverInfoDialog.findViewById(R.id.profileImage);
+                    RelativeLayout.LayoutParams driveLayoutParams = (RelativeLayout.LayoutParams)driverProfileImage.getLayoutParams();
+                    driveLayoutParams.setMargins(400, 75, 0, 0);
+                    driveLayoutParams.height = 200;
+                    driverProfileImage.setImageResource(driver.getProfileImage());
+                    AlertDialog driveInfoDialog = driveInfoDialogBuilder.create();
+                    driveInfoDialog.setView(driverInfoDialog);
+                    WindowManager.LayoutParams windowParams = driveInfoDialog.getWindow().getAttributes();
+                    windowParams.dimAmount = 0.75f;
+                    windowParams.flags |= WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+                    driveInfoDialog.getWindow().setLayout(1000, 900);
+                    driveInfoDialog.show();
+                }
+            }
+        });
         monthDisplay = (TextView)findViewById(R.id.calendar_date_display);
         updateCalendar();
     }
@@ -78,6 +111,22 @@ public class CalendarActivity extends AppCompatActivity {
         calGrid.setAdapter(new RydeCalendarAdapter(this, R.layout.ryde_calendar_date, days));
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM yyy");
         monthDisplay.setText(simpleDateFormat.format(calendarDisplay.getTime()));
+    }
+
+    //In Date.Java, equals compares exact miliseconds, need to write our own
+    private static Date dateInMap(Map<Date, User> datesMap, Date key) {
+        Calendar keyDate = Calendar.getInstance();
+        keyDate.setTime(key);
+        for(Date date: datesMap.keySet()) {
+            Calendar calDate = Calendar.getInstance();
+            calDate.setTime(date);
+            if(calDate.get(Calendar.DAY_OF_MONTH) == keyDate.get(Calendar.DAY_OF_MONTH)  &&
+                    calDate.get(Calendar.MONTH) == keyDate.get(Calendar.MONTH)
+                    && calDate.get(Calendar.YEAR) == keyDate.get(Calendar.YEAR)) {
+                return date;
+            }
+        }
+        return null;
     }
 
     private class RydeCalendarAdapter extends ArrayAdapter<Date> {
@@ -128,20 +177,6 @@ public class CalendarActivity extends AppCompatActivity {
             date.setText(String.valueOf(calDate.getDate()));
             return convertView;
         }
-        //In Date.Java, equals compares exact miliseconds, need to write our own
-        private Date dateInMap(Map<Date, User> datesMap, Date key) {
-            Calendar keyDate = Calendar.getInstance();
-            keyDate.setTime(key);
-            for(Date date: datesMap.keySet()) {
-                Calendar calDate = Calendar.getInstance();
-                calDate.setTime(date);
-                if(calDate.get(Calendar.DAY_OF_MONTH) == keyDate.get(Calendar.DAY_OF_MONTH)  &&
-                        calDate.get(Calendar.MONTH) == keyDate.get(Calendar.MONTH)
-                        && calDate.get(Calendar.YEAR) == keyDate.get(Calendar.YEAR)) {
-                    return date;
-                }
-            }
-            return null;
-        }
+
     }
 }

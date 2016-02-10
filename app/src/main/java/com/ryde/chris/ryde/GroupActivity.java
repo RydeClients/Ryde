@@ -53,16 +53,16 @@ public class GroupActivity extends TouchActivity {
     private void setUpGroupData() {
         Intent fromMainActivity = getIntent();
         Group theGroup = fromMainActivity.getParcelableExtra("group");
-        mGroup = theGroup;
-        final MemberAdapter memberAdapter = new MemberAdapter(this, R.layout.member_layout, theGroup.getUsers());
-        ListView members = (ListView)this.findViewById(R.id.members);
-        members.setAdapter(memberAdapter);
-        members.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent startProfileActivity = new Intent(GroupActivity.this, ProfileActivity.class);
-                startProfileActivity.putExtra("profile", memberAdapter.getItem(position));
-                GroupActivity.this.startActivity(startProfileActivity);
+                mGroup = theGroup;
+                final MemberAdapter memberAdapter = new MemberAdapter(this, R.layout.member_layout, theGroup.getUsers());
+                ListView members = (ListView)this.findViewById(R.id.members);
+                members.setAdapter(memberAdapter);
+                members.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent startProfileActivity = new Intent(GroupActivity.this, ProfileActivity.class);
+                        startProfileActivity.putExtra("profile", memberAdapter.getItem(position));
+                        GroupActivity.this.startActivity(startProfileActivity);
 
             }
         });
