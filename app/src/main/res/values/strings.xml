@@ -21,6 +21,7 @@
     <string name="err_login">Error occurred while login:</string>
     <string name="err_signup">Error occurred during signup:</string>
     <string name="group_description">Group Description:</string>
+    <string name="group_title">Group Title</string>
     <string name="login">Login</string>
     <string name="members">Members</string>
     <string name="my_groups">My Groups</string>

@@ -49,7 +49,7 @@ public class MainActivity extends TouchActivity {
                 AlertDialog.Builder addGroupDialog = new AlertDialog.Builder(MainActivity.this, R.style.AppTheme);
                 LayoutInflater inflateDialogLayout = (LayoutInflater) MainActivity.this.getSystemService(LAYOUT_INFLATER_SERVICE);
                 final View dialogView = inflateDialogLayout.inflate(R.layout.add_group_dialog, null, false);
-                addGroupDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                addGroupDialog.setPositiveButton("Create", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         EditText newGroup = (EditText) dialogView.findViewById(R.id.new_group_name);
                         String addToGroup = newGroup.getText().toString();
@@ -64,7 +64,7 @@ public class MainActivity extends TouchActivity {
                 WindowManager.LayoutParams windowParams = addGroupDia.getWindow().getAttributes();
                 windowParams.dimAmount = 0.75f;
                 windowParams.flags |= WindowManager.LayoutParams.FLAG_DIM_BEHIND;
-                addGroupDia.getWindow().setLayout(1000, 1000);
+                addGroupDia.getWindow().setLayout(1000, 1450);
             }
         });
     }
