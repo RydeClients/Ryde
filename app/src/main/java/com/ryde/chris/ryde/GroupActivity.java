@@ -40,33 +40,25 @@ public class GroupActivity extends TouchActivity {
                 GroupActivity.this.startActivity(startMaps);
             }
         });
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
     }
 
     private void setUpGroupData() {
         Intent fromMainActivity = getIntent();
-        Group theGroup = fromMainActivity.getParcelableExtra("group");
-                mGroup = theGroup;
-                final MemberAdapter memberAdapter = new MemberAdapter(this, R.layout.member_layout, theGroup.getUsers());
-                ListView members = (ListView)this.findViewById(R.id.members);
-                members.setAdapter(memberAdapter);
-                members.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Intent startProfileActivity = new Intent(GroupActivity.this, ProfileActivity.class);
-                        startProfileActivity.putExtra("profile", memberAdapter.getItem(position));
-                        GroupActivity.this.startActivity(startProfileActivity);
+        mGroup = ((RydeApplication)getApplicationContext()).getCurrUserGroup().get(
+                fromMainActivity.getIntExtra("group", 0));
+        final MemberAdapter memberAdapter = new MemberAdapter(this, R.layout.member_layout, mGroup.getUsers());
+        ListView members = (ListView)this.findViewById(R.id.members);
+        members.setAdapter(memberAdapter);
+        members.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent startProfileActivity = new Intent(GroupActivity.this, ProfileActivity.class);
+                startProfileActivity.putExtra("profile", memberAdapter.getItem(position));
+                GroupActivity.this.startActivity(startProfileActivity);
 
             }
         });
-        ((TextView)findViewById(R.id.membersTextView)).setText("Group ID: " + theGroup.getId());
+        ((TextView)findViewById(R.id.membersTextView)).setText("Group ID: " + mGroup.getId());
     }
 
     @Override
@@ -81,16 +73,7 @@ public class GroupActivity extends TouchActivity {
         int id = item.getItemId();
         if(id == R.id.calendar) {
             Intent startCalendarActivity = new Intent(this, CalendarActivity.class);
-            Map<Date, User> drivingSchedule = new HashMap<Date, User>();
-            List<User> members = mGroup.getUsers();
-            Calendar cal = Calendar.getInstance();
-            int[] datesToTest = {11, 12, 17, 22, 26};
-            for(int k=0; k<datesToTest.length; k++) {
-                cal.set(2016, 1, datesToTest[k]);
-                drivingSchedule.put(cal.getTime(), members.get((int) (Math.random() * members.size())));
-            }
-            mGroup.setSchedule(drivingSchedule);
-            startCalendarActivity.putExtra("group", mGroup);
+            startCalendarActivity.putExtra("group", getIntent().getIntExtra("group", 0));
             this.startActivity(startCalendarActivity);
         } else if(id == R.id.groupChat) {
             Intent startGroupChatActivity = new Intent(this, GroupChatActivity.class);

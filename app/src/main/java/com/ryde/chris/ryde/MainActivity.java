@@ -24,19 +24,17 @@ import android.widget.TextView;
 
 import com.melnykov.fab.FloatingActionButton;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 public class MainActivity extends TouchActivity {
     private FloatingActionButton addToGroups;
     private ListView groupViewList;
-    private List<Group> groupsList;
+    private List<Group> currUserGroups;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        currUserGroups =  ((RydeApplication)getApplicationContext()).getCurrUserGroup();
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -53,7 +51,7 @@ public class MainActivity extends TouchActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         EditText newGroup = (EditText) dialogView.findViewById(R.id.new_group_name);
                         String addToGroup = newGroup.getText().toString();
-                        groupsList.add(new Group(addToGroup));
+                        currUserGroups.add(new Group(addToGroup));
                         ((BaseAdapter) groupViewList.getAdapter()).notifyDataSetChanged();
                     }
                 });
@@ -71,24 +69,7 @@ public class MainActivity extends TouchActivity {
 
     private void setUpGroupsList() {
         groupViewList = (ListView)findViewById(R.id.grouplist);
-        groupsList = new ArrayList<Group>();
-        String[] mockGroupNames = {"DayCare","Soccer Practice", "Computer Science Study", "School", "Work"};
-        User[] stubUsers = { new User("Chris Sun", R.drawable.chris), new User("Barack Obama",R.drawable.barack_obama),
-                new User("Ariana Grande",R.drawable.ariana), new User("Shaheen Sharifian", R.drawable.shariwizard),
-                    new User("Fion Chan", R.drawable.fion)};
-        List<User> usersList = new ArrayList<User>(Arrays.asList(stubUsers));
-        for(String name:mockGroupNames) {
-            List<User> testUsers = new ArrayList<>();
-            testUsers.addAll(usersList);
-            int trySize = new Random().nextInt(5) + 1;
-            for(int k=0;k<usersList.size() - trySize; k++) {
-                testUsers.remove(new Random().nextInt(testUsers.size()));
-            }
-            Group toAdd = new Group(name);
-            toAdd.setUsersList(testUsers);
-            groupsList.add(toAdd);
-        }
-        ArrayAdapter<Group> groupAdapter = new GroupAdapter(this,R.layout.simple_group_list_item, groupsList);
+        ArrayAdapter<Group> groupAdapter = new GroupAdapter(this,R.layout.simple_group_list_item, currUserGroups);
         groupViewList.setAdapter(groupAdapter);
         FloatingActionButton addToGroups = (FloatingActionButton)findViewById(R.id.add_group_button);
         addToGroups.attachToListView(groupViewList);
@@ -96,7 +77,7 @@ public class MainActivity extends TouchActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent startGroupActivity = new Intent(MainActivity.this, GroupActivity.class);
-                startGroupActivity.putExtra("group", groupsList.get(position));
+                startGroupActivity.putExtra("group", position);
                 MainActivity.this.startActivity(startGroupActivity);
             }
         });

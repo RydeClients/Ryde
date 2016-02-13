@@ -23,7 +23,9 @@ public class GroupChatActivity extends AppCompatActivity {
 
         mFireBase = new Firebase(FIREBASE_URL).child("chat");
         messageToSend = (EditText)findViewById(R.id.message_to_send);
-        messageAdapter = new MessageListAdapter(this, mFireBase.limitToFirst(50), (Group)getIntent().getParcelableExtra("group"));
+        Group theGroup = ((RydeApplication)getApplicationContext()).getCurrUserGroup()
+            .get(getIntent().getIntExtra("group", 0));
+        messageAdapter = new MessageListAdapter(this, mFireBase.limitToFirst(50), theGroup);
         findViewById(R.id.btnSend).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
