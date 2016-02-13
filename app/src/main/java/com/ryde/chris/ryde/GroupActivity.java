@@ -100,25 +100,4 @@ public class GroupActivity extends TouchActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    class MemberAdapter extends ArrayAdapter<User> {
-        private int resource;
-        public MemberAdapter(Context context, int resource, List<User> items) {
-            super(context, resource, items);
-            this.resource = resource;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View memberView = convertView;
-            if (memberView == null) {
-                LayoutInflater vi;
-                vi = LayoutInflater.from(getContext());
-                memberView = vi.inflate(resource, null);
-            }
-            User user = getItem(position);
-            ((TextView)memberView.findViewById(R.id.memberName)).setText(user.getName());
-            ((ImageView)memberView.findViewById(R.id.profileImage)).setImageResource(user.getProfileImage());
-            return memberView;
-        }
-    }
 }

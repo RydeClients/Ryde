@@ -30,6 +30,7 @@
     <string name="password">Password</string>
     <string name="pickup">Pickup</string>
     <string name="pickup_and_dropoff">Pickup and Dropoff Locations</string>
+    <string name="save">Save</string>
     <string name="set_location">Set Location</string>
     <string name="starting_point">Starting point</string>
     <string name="stub_name">Chris Sun</string>

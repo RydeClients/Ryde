@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/driver"
+        android:id="@+id/driver" />
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/driver"
+        android:layout_marginLeft="@dimen/pad_20dp"
+        android:layout_marginRight="@dimen/pad_20dp"
+        android:id="@+id/drivers" />
+    <TextView
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="@string/depart_to"
+        android:layout_marginLeft="30dp"
+        android:id="@+id/departToDestination"
+        android:layout_below="@id/driver"
+        android:layout_marginTop="60dp" />
+
+    <TextView
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:text="12"
+        android:gravity="center"
+        android:id="@+id/hourDepartToView"
+        android:layout_alignTop="@id/departToDestination"
+        android:layout_toRightOf="@id/departToDestination"
+        android:layout_marginLeft="10dp"
+        android:textSize="40dp"
+         />
+
+    <Button
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/increaseHourDepartTo"
+        android:background="@drawable/decrease"
+        android:layout_alignLeft="@id/hourDepartToView"
+        android:layout_above="@+id/hourDepartToView"
+        android:layout_marginLeft="10dp"
+        />
+
+    <Button
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/decreaseHourDepartTo"
+        android:background="@drawable/increase"
+        android:layout_alignLeft="@id/hourDepartToView"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/hourDepartToView"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00"
+        android:id="@+id/minuteDepartToView"
+        android:layout_alignTop="@id/departToDestination"
+        android:layout_toRightOf="@id/hourDepartToView"
+        android:layout_marginLeft="10dp"
+        android:textSize="40dp"
+        />
+
+    <Button
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/increaseMinDepartTo"
+        android:background="@drawable/decrease"
+        android:layout_marginLeft="6dp"
+        android:layout_alignLeft="@id/minuteDepartToView"
+        android:layout_above="@+id/minuteDepartToView"
+        />
+
+    <Button
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/decreaseMinDepartTo"
+        android:background="@drawable/increase"
+        android:layout_alignLeft="@id/minuteDepartToView"
+        android:layout_below="@+id/minuteDepartToView"
+        android:layout_marginLeft="6dp"
+        />
+    <ToggleButton
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:textOn="AM"
+        android:textOff="PM"
+        android:id="@+id/amPmDepartTo"
+        android:layout_alignTop="@id/departToDestination"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@id/minuteDepartToView" />
+    <!-- Repeat -->
+    <TextView
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="@string/depart_from"
+        android:layout_marginLeft="30dp"
+        android:id="@+id/departFromDestination"
+        android:layout_below="@id/departToDestination"
+        android:layout_marginTop="110dp" />
+
+    <TextView
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:text="8"
+        android:id="@+id/hourDepartFromView"
+        android:layout_alignTop="@id/departFromDestination"
+        android:layout_toRightOf="@id/departFromDestination"
+        android:gravity="center"
+        android:layout_marginLeft="10dp"
+        android:textSize="40dp"
+        />
+
+    <Button
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/increaseHourDepartFrom"
+        android:background="@drawable/decrease"
+        android:layout_alignLeft="@id/hourDepartFromView"
+        android:layout_above="@+id/hourDepartFromView"
+        android:layout_marginLeft="10dp"
+        />
+
+    <Button
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/decreaseHourDepartFrom"
+        android:background="@drawable/increase"
+        android:layout_alignLeft="@id/hourDepartFromView"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/hourDepartFromView"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00"
+        android:id="@+id/minuteDepartFromView"
+        android:layout_alignTop="@id/departFromDestination"
+        android:layout_toRightOf="@id/hourDepartFromView"
+        android:layout_marginLeft="10dp"
+        android:textSize="40dp"
+        />
+
+    <Button
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/increaseMinDepartFrom"
+        android:background="@drawable/decrease"
+        android:layout_marginLeft="6dp"
+        android:layout_alignLeft="@id/minuteDepartFromView"
+        android:layout_above="@+id/minuteDepartFromView"
+        />
+
+    <Button
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/decreaseMinDepartFrom"
+        android:background="@drawable/increase"
+        android:layout_alignLeft="@id/minuteDepartFromView"
+        android:layout_below="@+id/minuteDepartFromView"
+        android:layout_marginLeft="6dp"
+        />
+    <ToggleButton
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:textOn="AM"
+        android:textOff="PM"
+        android:id="@+id/amPmDepartFrom"
+        android:layout_alignTop="@id/departFromDestination"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@id/minuteDepartFromView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        android:id="@+id/saveText"
+        android:layout_below="@id/amPmDepartFrom"
+        android:layout_alignStart="@+id/amPmDepartFrom"
+        android:layout_marginTop="48dp"
+        android:textColor="@color/material_blue_500"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="10dp"
+        />
+
+</RelativeLayout>
