@@ -1,5 +1,9 @@
 package com.ryde.chris.ryde;
 
+import android.view.View;
+import android.widget.Spinner;
+import android.widget.TextView;
+
 /**
  * Created by chris on 2/13/2016.
  */
@@ -23,6 +27,13 @@ public class DriveInfo {
         this.driver = driver;
         departFrom = new DepartInfo(hourDepartFrom, minuteDepartFrom, isAmDepartFrom);
         departTo = new DepartInfo(hourDepartTo, minuteDepartTo, isAmDepartTo);
+    }
+    public void update(View updatedDriveInfo) {
+        driver = ((User)((Spinner)updatedDriveInfo.findViewById(R.id.drivers)).getSelectedItem());
+        departTo.hour = Integer.parseInt(((TextView)updatedDriveInfo.findViewById(R.id.hourDepartToView)).getText().toString());
+        departTo.minute = Integer.parseInt(((TextView) updatedDriveInfo.findViewById(R.id.minuteDepartToView)).getText().toString());
+        departFrom.hour = Integer.parseInt(((TextView)updatedDriveInfo.findViewById(R.id.hourDepartFromView)).getText().toString());
+        departFrom.minute = Integer.parseInt(((TextView)updatedDriveInfo.findViewById(R.id.minuteDepartFromView)).getText().toString());
     }
 }
 

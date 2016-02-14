@@ -95,12 +95,13 @@ public class CalendarActivity extends TouchActivity {
                             AlertDialog.Builder editDriveInfoDialogBuilder = new AlertDialog.Builder(CalendarActivity.this, R.style.AppTheme);
                             final View editDriveInfoView = inflateDriveInfoDialog.inflate(R.layout.edit_drive_info, null, false);
                             editDriveInfoDialogBuilder.setView(editDriveInfoView);
+                            int index = mGroup.getUsers().indexOf(driveInfo.driver);
                             int[] assignClickActions = {R.id.increaseHourDepartTo, R.id.decreaseHourDepartTo, R.id.increaseMinDepartTo, R.id.decreaseMinDepartTo,
                                  R.id.increaseHourDepartTo, R.id.increaseHourDepartFrom, R.id.decreaseHourDepartFrom, R.id.increaseMinDepartFrom, R.id.decreaseMinDepartFrom,
                                     R.id.increaseHourDepartFrom};
                             assignTouchEffects(editDriveInfoView, assignClickActions);
                             populateDepartInfo(editDriveInfoView, R.id.hourDepartToView, R.id.minuteDepartToView, R.id.amPmDepartTo, driveInfo.departTo);
-                            populateDepartInfo(editDriveInfoView,  R.id.hourDepartFromView, R.id.minuteDepartFromView, R.id.amPmDepartFrom, driveInfo.departFrom);
+                            populateDepartInfo(editDriveInfoView, R.id.hourDepartFromView, R.id.minuteDepartFromView, R.id.amPmDepartFrom, driveInfo.departFrom);
                             setUpHourText(editDriveInfoView, R.id.hourDepartToView, R.id.increaseHourDepartTo, R.id.decreaseHourDepartTo,
                                     R.id.amPmDepartTo);
                             setUpHourText(editDriveInfoView, R.id.hourDepartFromView, R.id.increaseHourDepartFrom, R.id.decreaseHourDepartFrom,
@@ -109,8 +110,15 @@ public class CalendarActivity extends TouchActivity {
                                     R.id.decreaseMinDepartTo);
                             setUpMinuteText(editDriveInfoView, R.id.minuteDepartFromView, R.id.increaseMinDepartFrom,
                                     R.id.decreaseMinDepartFrom);
-                            setUpDrivers(editDriveInfoView);
+                            setUpDrivers(editDriveInfoView, index);
                             final AlertDialog editDriveInfoDialog = editDriveInfoDialogBuilder.create();
+                            editDriveInfoView.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    driveInfo.update(editDriveInfoView);
+                                    editDriveInfoDialog.dismiss();
+                                }
+                            });
                             editDriveInfoDialog.getWindow().getAttributes().y = 20;
                             WindowManager.LayoutParams windowParams = editDriveInfoDialog.getWindow().getAttributes();
                             windowParams.dimAmount = 0.75f;
@@ -160,12 +168,15 @@ public class CalendarActivity extends TouchActivity {
         }
         ((ToggleButton)parentView.findViewById(idOfAmPm)).setChecked(departInfo.isAm);
     }
+    
     //set up the spinner of drivers
-    private void setUpDrivers(View parentView) {
+    private void setUpDrivers(View parentView, int startIndex) {
         Spinner drivers = (Spinner)parentView.findViewById(R.id.drivers);
         MemberAdapter userArrayAdapter = new MemberAdapter(this, R.layout.member_layout, mGroup.getUsers());
         drivers.setAdapter(userArrayAdapter);
+        drivers.setSelection(startIndex);
     }
+
     private void setUpHourText(View parent, int idOfHourText, int idOfIncreaseButton, int idOfDecreaseButton, int idOfAmPm) {
         final TextView  hourTextView = (TextView)parent.findViewById(idOfHourText);
         final ToggleButton amPm = (ToggleButton)parent.findViewById(idOfAmPm);
